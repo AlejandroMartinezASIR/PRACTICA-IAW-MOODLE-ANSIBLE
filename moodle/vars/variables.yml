@@ -1,0 +1,27 @@
+certbot:
+    email: demo@demo.es
+    domain: dominio-amu.ddnsking.com
+
+moodle:
+    MOODLE_DB_NAME: wp_user
+    MOODLE_DB_USER: wp_user
+    MOODLE_DB_PASSWORD: wp_passwd
+    MOODLE_DB_HOST: 172.31.43.194
+    MOODLE_DIRECTORY: /var/www/html
+    MOODLE_TITLE: "IAW"
+    MOODLE_ADMIN_USER: admin
+    MOODLE_ADMIN_PASS: Usuario0?
+    MOODLE_ADMIN_EMAIL: demo@demo.es
+    MOODLE_WWWROOT: "https://dominio-amu.ddnsking.com"
+    MOODLE_DATAROOT: /var/moodledata
+    MOODLE_DIR: /var/www/html
+    MOODLE_DB_TYPE: mysqli
+    MOODLE_FULLNAME: "IAW Moodle"
+    MOODLE_SHORTNAME: "IAW Moodle"
+    MOODLE_SUMMARY: "Este es el Moodle que hemos desplegado con ansile"
+    MOODLE_DATA_DIR: /var/moodledata
+    MOODLE_LANG: es
+
+MYSQL:
+    MYSQL_PRIV: 172.31.43.194
+    IP_CLIENT_MYSQL: 172.31.37.4
