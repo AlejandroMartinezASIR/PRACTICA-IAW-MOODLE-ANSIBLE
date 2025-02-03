@@ -18,7 +18,7 @@ moodle:
     MOODLE_DB_TYPE: mysqli
     MOODLE_FULLNAME: "IAW Moodle"
     MOODLE_SHORTNAME: "IAW Moodle"
-    MOODLE_SUMMARY: "Este es el Moodle que hemos desplegado con ansile"
+    MOODLE_SUMMARY: "Este es el Moodle que hemos desplegado con ansible"
     MOODLE_DATA_DIR: /var/moodledata
     MOODLE_LANG: es
 

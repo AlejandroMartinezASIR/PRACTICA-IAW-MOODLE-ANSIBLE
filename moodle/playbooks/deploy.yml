@@ -3,6 +3,9 @@
   hosts: frontend
   become: yes
 
+  vars_files:
+    - ../vars/variables.yml
+
   tasks:
     - name: Asegurar que los paquetes requeridos están instalados
       apt:
@@ -10,6 +13,12 @@
           - apache2
           - unzip
           - wget
+          - php-curl
+          - php-zip
+          - php-xml
+          - php-mbstring
+          - php-gd 
+          - php-intl
         state: present
 
     - name: Habilitar el módulo de reescritura de Apache
@@ -17,12 +26,7 @@
       notify: Reiniciar Apache
 
     - name: Eliminar instalación previa de Moodle
-      file:
-        path: "{{ item }}"
-        state: absent
-      loop:
-        - /tmp/v4.3.1.zip
-        - /var/www/html/*
+      command: rm -rf /tmp/v4.3.1.zip && /var/www/html/* && /var/www/html/config.php
 
     - name: Descargar el código fuente de Moodle
       get_url:
@@ -35,15 +39,18 @@
         dest: /tmp
         remote_src: yes
 
-    - name: Mover archivos de Moodle a /var/www/html
-      command: mv /tmp/moodle-4.3.1 /var/www/html
+    - name: Copiamos archivos de Moodle a /var/www/html
+      copy:
+        src: /tmp/moodle-4.3.1/
+        dest: /var/www/html/
+        remote_src: yes
       
 
     - name: Establecer propiedad y permisos correctos para Moodle
       file:
         path: /var/www/html
         owner: www-data
-        group: www-data
+        group: www-data 
         mode: "0755"
         recurse: yes
 
@@ -65,25 +72,27 @@
         - /etc/php/8.3/cli/php.ini
       notify: Reiniciar Apache
 
-    - name: Instalar Moodle
-      command: >
-        sudo -u www-data php /var/www/html/admin/cli/install.php
-        --lang={{ MOODLE_LANG }}
-        --wwwroot={{ MOODLE_WWWROOT }}
-        --dataroot={{ MOODLE_DATAROOT }}
-        --dbtype={{ MOODLE_DB_TYPE }}
-        --dbhost={{ MOODLE_DB_HOST }}
-        --dbname={{ MOODLE_DB_NAME }}
-        --dbuser={{ MOODLE_DB_USER }}
-        --dbpass={{ MOODLE_DB_PASS }}
-        --fullname="{{ MOODLE_FULLNAME }}"
-        --shortname="{{ MOODLE_SHORTNAME }}"
-        --summary="{{ MOODLE_SUMMARY }}"
-        --adminuser={{ MOODLE_ADMIN_USER }}
-        --adminpass={{ MOODLE_ADMIN_PASS }}
-        --adminemail={{ MOODLE_ADMIN_EMAIL }}
-        --non-interactive
+    - name: Instalar Moodle desde PHP CLI
+      command:
+        php install.php \
+        --lang={{ moodle.MOODLE_LANG }} \
+        --wwwroot="{{ moodle.MOODLE_WWWROOT  }}" \
+        --dataroot={{ moodle.MOODLE_DATAROOT  }} \
+        --dbtype={{ moodle.MOODLE_DB_TYPE }} \
+        --dbhost={{ moodle.MOODLE_DB_HOST }} \
+        --dbname={{ moodle.MOODLE_DB_NAME }} \
+        --dbuser={{ moodle.MOODLE_DB_USER }} \
+        --dbpass={{ moodle.MOODLE_DB_PASSWORD }} \
+        --fullname="{{ moodle.MOODLE_FULLNAME }}" \
+        --shortname="{{ moodle.MOODLE_SHORTNAME }}" \
+        --summary="{{ moodle.MOODLE_SUMMARY }}" \
+        --adminuser={{ moodle.MOODLE_ADMIN_USER }} \
+        --adminpass={{ moodle.MOODLE_ADMIN_PASS }} \
+        --adminemail={{ moodle.MOODLE_ADMIN_EMAIL }} \
+        --non-interactive \
         --agree-license
+      args:
+        chdir: /var/www/html/admin/cli/
 
     - name: Configurar ajustes de Moodle
       lineinfile:
