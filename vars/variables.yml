@@ -1,0 +1,36 @@
+# Variables para el certificado de LetsEncrypt
+letsencrypt:
+  email: "admin@gmail.com"
+  domain: "dominio-amu.ddnsking.com"
+
+# Variables para Moodle
+moodle:
+  version: "4.3.1"
+  lang: "es"
+  wwwroot: "https://dominio-amu.ddnsking.com"
+  dataroot: "/var/moodledata"
+  db:
+    type: "mysqli"
+    host: "172.31.43.194"
+    name: "Moodle"
+    user: "admin"
+    pass: "Usuario?"
+  fullname: "Practica 3.1"
+  shortname: "MOODLE"
+  summary: "Esta es mi web de Moodle"
+  admin:
+    user: "admin"
+    pass: "Usuario0?"
+    email: "demo@demo.es"
+
+# Direcciones IP
+ips:
+  frontend_private: "172.31.32.17"
+  backend_private: "172.31.43.194"
+
+# Rutas
+routes:
+  apache_ini: "/etc/php/8.3/apache2/php.ini"
+  cli_ini: "/etc/php/8.3/cli/php.ini"
+  config_php: "/var/www/html/config.php"
+  moodle_directory: "/var/www/html"
