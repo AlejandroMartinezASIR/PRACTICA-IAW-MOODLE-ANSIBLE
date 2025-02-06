@@ -365,3 +365,57 @@ Este playbook instala y configura Moodle en el servidor frontend, configurando A
       ansible.builtin.service:
         name: apache2
         state: restarted
+```
+### 6. **Instalar y configurar Certbot para Let's Encrypt**
+
+Este playbook instala y configura Certbot en el servidor frontend, utilizando Snap y creando un enlace simbólico para Certbot. También solicita un certificado de Let's Encrypt para el dominio configurado.
+
+#### Tareas:
+
+- Actualiza Snap.
+- Elimina instalaciones previas de Certbot.
+- Instala Certbot usando Snap.
+- Crea un enlace simbólico para Certbot.
+- Solicita un certificado de Let's Encrypt.
+
+```yaml
+- name: Instalar y configurar Certbot para Let's Encrypt
+  hosts: frontend  
+  become: yes  # Ejecutar con privilegios de superusuario
+  vars_files:
+    - ../vars/variables.yml  # Archivo YAML con las variables necesarias
+
+  tasks:
+    - name: Actualizar snap
+      ansible.builtin.snap:
+        name: core
+        state: present
+
+    - name: Eliminar instalaciones previas de Certbot (si existen)
+      ansible.builtin.apt:
+        name: certbot
+        state: absent
+
+    - name: Instalar Certbot usando snap
+      ansible.builtin.snap:
+        name: certbot
+        classic: yes  
+
+    - name: Crear enlace simbólico para Certbot
+      ansible.builtin.file:
+        src: /snap/bin/certbot
+        dest: /usr/bin/certbot
+        state: link
+        force: yes  
+
+    - name: Solicitar certificado de Let's Encrypt
+      ansible.builtin.command:
+        cmd: |
+          certbot --apache -m {{ letsencrypt.email }} --agree-tos --no-eff-email -d {{ letsencrypt.domain }} --non-interactive
+```
+# Comprobaciones
+## Moodle
+![moodle](images/moodle1.PNG)
+![admin](images/moodle2.PNG)
+## No-ip
+![no-ip](images/no-ip.PNG)
