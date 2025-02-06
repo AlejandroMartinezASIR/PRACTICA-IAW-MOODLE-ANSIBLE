@@ -245,6 +245,7 @@ Este playbook instala y configura Apache junto con PHP y los módulos necesarios
         owner: www-data
         group: www-data
         mode: "0644"
+```
 
 ### 5. **Instalación y configuración de Moodle**
 
