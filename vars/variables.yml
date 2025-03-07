@@ -12,7 +12,7 @@ moodle:
     dbname: moodle_db
     dbuser: moodle_user
     dbpass: moodle_password
-    fullname: "Examen de IAW Moodle"
+    fullname: "IAW Moodle"
     shortname: "IAW Moodle"
     summary: "Este es el Moodle que hemos desplegado"
     adminuser: admin
@@ -24,6 +24,7 @@ frontend_private_ip: "172.31.42.209"
 certbot:
     email: admin@gmail.com
     domain: dominio-amu.ddnsking.com
+    
 phpmyadmin:
     user: pma_user
     password: pma_password

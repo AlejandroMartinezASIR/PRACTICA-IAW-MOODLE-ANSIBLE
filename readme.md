@@ -415,6 +415,7 @@ Este playbook instala y configura Certbot en el servidor frontend, utilizando Sn
 ```
 # Comprobaciones
 ## Moodle
+![moodle](images/ansiblemoodle.png)
 ![moodle](images/moodle1.PNG)
 ![admin](images/moodle2.PNG)
 ## No-ip
