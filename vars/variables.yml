@@ -1,36 +1,30 @@
-# Variables para el certificado de LetsEncrypt
-letsencrypt:
-  email: "admin@gmail.com"
-  domain: "dominio-amu.ddnsking.com"
+db:
+    name: moodle_db
+    user: moodle_user
+    password: moodle_password
 
-# Variables para Moodle
 moodle:
-  version: "4.3.1"
-  lang: "es"
-  wwwroot: "https://dominio-amu.ddnsking.com"
-  dataroot: "/var/moodledata"
-  db:
-    type: "mysqli"
-    host: "172.31.43.194"
-    name: "Moodle"
-    user: "admin"
-    pass: "Usuario?"
-  fullname: "Practica 3.1"
-  shortname: "MOODLE"
-  summary: "Esta es mi web de Moodle"
-  admin:
-    user: "admin"
-    pass: "Usuario0?"
-    email: "demo@demo.es"
+    lang: es
+    wwwroot: "https://moodle-ansible.zapto.org"
+    dataroot: "/var/moodledata"
+    dbtype: mysqli
+    dbhost: 172.31.37.0
+    dbname: moodle_db
+    dbuser: moodle_user
+    dbpass: moodle_password
+    fullname: "Examen de IAW Moodle"
+    shortname: "IAW Moodle"
+    summary: "Este es el Moodle que hemos desplegado en el examen (Antonio Jesus Galvez Rodriguez)"
+    adminuser: admin
+    adminpass: Usuario0?
+    adminemail: admin@gmail.com
 
-# Direcciones IP
-ips:
-  frontend_private: "172.31.32.17"
-  backend_private: "172.31.43.194"
+frontend_private_ip: "172.31.33.62"
 
-# Rutas
-routes:
-  apache_ini: "/etc/php/8.3/apache2/php.ini"
-  cli_ini: "/etc/php/8.3/cli/php.ini"
-  config_php: "/var/www/html/config.php"
-  moodle_directory: "/var/www/html"
+certbot:
+    email: admin@gmail.com
+    domain: moodle-ansible.zapto.org
+phpmyadmin:
+    user: pma_user
+    password: pma_password
+    db_name: db_name
