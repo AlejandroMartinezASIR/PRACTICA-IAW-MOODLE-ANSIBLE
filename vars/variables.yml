@@ -5,25 +5,25 @@ db:
 
 moodle:
     lang: es
-    wwwroot: "https://moodle-ansible.zapto.org"
+    wwwroot: "https://dominio-amu.ddnsking.com"
     dataroot: "/var/moodledata"
     dbtype: mysqli
-    dbhost: 172.31.37.0
+    dbhost: 172.31.39.117
     dbname: moodle_db
     dbuser: moodle_user
     dbpass: moodle_password
     fullname: "Examen de IAW Moodle"
     shortname: "IAW Moodle"
-    summary: "Este es el Moodle que hemos desplegado en el examen (Antonio Jesus Galvez Rodriguez)"
+    summary: "Este es el Moodle que hemos desplegado"
     adminuser: admin
     adminpass: Usuario0?
     adminemail: admin@gmail.com
 
-frontend_private_ip: "172.31.33.62"
+frontend_private_ip: "172.31.42.209"
 
 certbot:
     email: admin@gmail.com
-    domain: moodle-ansible.zapto.org
+    domain: dominio-amu.ddnsking.com
 phpmyadmin:
     user: pma_user
     password: pma_password
